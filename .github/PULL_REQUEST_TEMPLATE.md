@@ -1,3 +1,4 @@
+<!-- I want to review in Japanese. -->
 # 背景/Context
 
 - この PR をマージするとできるようになること
@@ -23,3 +24,4 @@ ex)
 - 書いてみたが自信のないところ
 - こういう案も思いついたのだけど、どう思う？
 - インラインでコメントしてもOK
+<!-- I want to review in Japanese. -->
