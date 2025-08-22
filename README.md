@@ -1,0 +1,2 @@
+# emopathy-api
+Emopathy.appのapi
