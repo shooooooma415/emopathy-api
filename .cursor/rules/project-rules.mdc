@@ -21,10 +21,12 @@ alwaysApply: false
 .
 ├── cmd            // main.go 
 ├── config         // 環境変数、設定ファイル
+├── db             // migration用sqlファイル
+├── scripts        // shファイル
 ├── domain         // ドメイン層（エンティティ，リポジトリインタフェース）
 ├── usecase        // ユースケース層
 ├── infrastructure // インフラ層（postgresql 接続，外部サービス実装）
-│   └── postgreSQL
+│   └── postgres
 ├── middleware     // ミドルウェア層
 ├── presentation   // プレゼンテーション層（HTTP ハンドラ／コントローラ）
 │   └── v1         // バージョンごとにディレクトリ分割
