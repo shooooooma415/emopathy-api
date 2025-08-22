@@ -8,6 +8,16 @@ services:
       - "8080:8080"
     depends_on:
       - postgres
+      - migrate
+    env_file:
+      - .env.local
+
+  migrate:
+    build:
+      context: .
+      dockerfile: db/Dockerfile
+    depends_on:
+      - postgres
     env_file:
       - .env.local
 
