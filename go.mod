@@ -1,9 +1,10 @@
 module emopathy-api
 
-go 1.24.3
+go 1.25
+
+require github.com/labstack/echo/v4 v4.13.4
 
 require (
-	github.com/labstack/echo/v4 v4.13.4
 	github.com/labstack/gommon v0.4.2 // indirect
 	github.com/mattn/go-colorable v0.1.14 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect

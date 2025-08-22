@@ -1,4 +1,4 @@
-FROM golang:1.24.3-alpine AS builder
+FROM golang:1.25.0-alpine AS builder
 
 WORKDIR /app
 
@@ -9,7 +9,7 @@ RUN apk add --no-cache git sqlite-dev gcc musl-dev
 COPY . .
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -installsuffix cgo -o main ./cmd/main.go
 
-FROM alpine:3.19
+FROM alpine:3.20
 RUN apk --no-cache add ca-certificates
 WORKDIR /root/
 
