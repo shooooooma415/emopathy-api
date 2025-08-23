@@ -27,7 +27,7 @@ erDiagram
 
     UserEvents {
         uuid id PK
-        int user_id FK
+        uuid user_id FK
         timestamp cretate_at
         string event_name
         string emotion
@@ -35,7 +35,7 @@ erDiagram
 
     Reactions{
 		uuid id PK
-        int event_id FK
+        uuid event_id FK
         uuid user_id FK
         timestamp cretate_at
         int type　
