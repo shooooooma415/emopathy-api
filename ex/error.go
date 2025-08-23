@@ -7,6 +7,7 @@ import (
 	"strings"
 )
 
+// Error represents an extended error with additional context
 type Error struct {
 	Err   error     `json:"error,omitempty"`
 	Stack []string  `json:"stack,omitempty"`
@@ -32,6 +33,7 @@ func new(err error, kind ErrorKind, args ...any) *Error {
 	}
 }
 
+// Wrap wraps an error with additional arguments
 func Wrap(err error, args ...any) error {
 	return wrap(err, emptyKind, args...)
 }
@@ -50,9 +52,8 @@ func wrap(err error, kind ErrorKind, args ...any) error {
 		if converted.Kind == kind {
 			converted.Args = append(converted.Args, args...)
 			return converted
-		} else {
-			return new(err, kind, append(converted.Args, args...)...)
 		}
+		return new(err, kind, append(converted.Args, args...)...)
 	}
 
 	return new(err, kind, args...)
@@ -76,16 +77,17 @@ func stackTrace() []string {
 	return lines
 }
 
+// ErrInRecover is returned when a panic is recovered but the recovered value is not an error
 var ErrInRecover = errors.New("error in recover")
 
+// Recover recovers from a panic and converts it to an error
 func Recover(e any) error {
 	if e != nil {
 		stack := debug.Stack()
 		if err, ok := e.(error); ok {
 			return Wrap(err, string(stack))
-		} else {
-			return Wrap(ErrInRecover, e, string(stack))
 		}
+		return Wrap(ErrInRecover, e, string(stack))
 	}
 	return nil
 }

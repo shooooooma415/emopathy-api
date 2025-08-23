@@ -4,8 +4,10 @@ import (
 	"errors"
 )
 
+// ErrorKind represents the type of error
 type ErrorKind string
 
+// Error kinds
 const (
 	emptyKind               ErrorKind = ""
 	InvalidArgumentError    ErrorKind = "InvalidArgument"
@@ -31,7 +33,6 @@ func (e *Error) Is(target error) bool {
 	}
 
 	if targetErr, ok := target.(*Error); ok {
-		// Check kind
 		if targetErr.Kind != emptyKind && isKindOf(e, targetErr.Kind) {
 			return true
 		}
@@ -48,9 +49,8 @@ func GetKind(err error) ErrorKind {
 	kind, ok := getKind(err)
 	if ok {
 		return kind
-	} else {
-		return InternalError
 	}
+	return InternalError
 }
 
 func getKind(err error) (kind ErrorKind, ok bool) {
@@ -58,21 +58,16 @@ func getKind(err error) (kind ErrorKind, ok bool) {
 		return emptyKind, false
 	}
 
-	// First, pick up the kind from the error itself
 	if hasKind, ok := err.(*Error); ok { //nolint: errorlint // errors.As() を使えという指摘だが、ここでは err 変数そのものが ex.Error 型であるかどうかが重要
 		if hasKind.Kind != emptyKind {
 			return hasKind.Kind, true
 		}
 	}
 
-	// Now, we check wrapped (nested) errors recursively
-
-	// For the error which wraps single error
 	if unwrappable, ok := err.(interface{ Unwrap() error }); ok {
 		return getKind(unwrappable.Unwrap())
 	}
 
-	// For the error which wraps multiple errors
 	if multi, ok := err.(interface{ Unwrap() []error }); ok {
 		errs := multi.Unwrap()
 		kinds := make([]ErrorKind, 0, len(errs))
@@ -84,14 +79,10 @@ func getKind(err error) (kind ErrorKind, ok bool) {
 
 		switch len(kinds) {
 		case 0:
-			// No kind is determined
 			return emptyKind, false
 		case 1:
-			// A kind is determined
 			return kinds[0], true
 		default:
-			// Multiple kinds are found, so we cannot determine the kind.
-			// It should be a programming error.
 			return emptyKind, false
 		}
 	}
