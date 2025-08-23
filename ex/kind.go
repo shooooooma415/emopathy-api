@@ -23,6 +23,7 @@ const (
 	FailedPreconditionError ErrorKind = "FailedPrecondition"
 )
 
+// Is checks if the error matches the target error or kind
 func (e *Error) Is(target error) bool {
 	if target == nil {
 		return false
@@ -45,6 +46,7 @@ func isKindOf(err error, kind ErrorKind) bool {
 	return GetKind(err) == kind
 }
 
+// GetKind returns the kind of the error, or InternalError if no kind is determined
 func GetKind(err error) ErrorKind {
 	kind, ok := getKind(err)
 	if ok {
@@ -90,42 +92,52 @@ func getKind(err error) (kind ErrorKind, ok bool) {
 	return emptyKind, false
 }
 
+// WrapAsInvalidArgument wraps an error as an InvalidArgument error
 func WrapAsInvalidArgument(err error, args ...any) error {
 	return wrap(err, InvalidArgumentError, args...)
 }
 
+// WrapAsUnauthenticated wraps an error as an Unauthenticated error
 func WrapAsUnauthenticated(err error, args ...any) error {
 	return wrap(err, UnauthenticatedError, args...)
 }
 
+// WrapAsAccessDenied wraps an error as an AccessDenied error
 func WrapAsAccessDenied(err error, args ...any) error {
 	return wrap(err, AccessDeniedError, args...)
 }
 
+// WrapAsNotFound wraps an error as a NotFound error
 func WrapAsNotFound(err error, args ...any) error {
 	return wrap(err, NotFoundError, args...)
 }
 
+// WrapAsTimeout wraps an error as a Timeout error
 func WrapAsTimeout(err error, args ...any) error {
 	return wrap(err, TimeoutError, args...)
 }
 
+// WrapAsConflict wraps an error as a Conflict error
 func WrapAsConflict(err error, args ...any) error {
 	return wrap(err, ConflictError, args...)
 }
 
+// WrapAsResourceExhausted wraps an error as a ResourceExhausted error
 func WrapAsResourceExhausted(err error, args ...any) error {
 	return wrap(err, ResourceExhaustedError, args...)
 }
 
+// WrapAsCanceled wraps an error as a Canceled error
 func WrapAsCanceled(err error, args ...any) error {
 	return wrap(err, CanceledError, args...)
 }
 
+// WrapAsDependentService wraps an error as a DependentService error
 func WrapAsDependentService(err error, args ...any) error {
 	return wrap(err, DependentServiceError, args...)
 }
 
+// WrapAsFailedPrecondition wraps an error as a FailedPrecondition error
 func WrapAsFailedPrecondition(err error, args ...any) error {
 	return wrap(err, FailedPreconditionError, args...)
 }
