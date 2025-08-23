@@ -10,7 +10,6 @@ CREATE INDEX idx_group_members_user_id ON group_members(user_id);
 
 -- UserEvents テーブルのインデックス
 CREATE INDEX idx_user_events_user_id ON user_events(user_id);
-CREATE INDEX idx_user_events_user_created ON user_events(group_id, created_at);
 
 -- Reactions テーブルのインデックス
 CREATE INDEX idx_reactions_event_id ON reactions(event_id);
