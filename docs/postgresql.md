@@ -20,8 +20,8 @@ erDiagram
 
     GroupMembers {
         uuid id PK
-        int group_id FK
-        int user_id FK
+        uuid group_id FK
+        uuid user_id FK
         bool admin
     }
 
