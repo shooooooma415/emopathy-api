@@ -1,4 +1,3 @@
-<!-- I want to review in Japanese. -->
 # 背景/Context
 
 - この PR をマージするとできるようになること
@@ -13,7 +12,7 @@
 
 ## テスト
 
-- マージボタンを押してもらうための安心できる材料
+- [] item 1
 
 ex)
 「ステージングでこれこれの確認をした」
@@ -24,4 +23,16 @@ ex)
 - 書いてみたが自信のないところ
 - こういう案も思いついたのだけど、どう思う？
 - インラインでコメントしてもOK
+
+<!-- for GitHub Copilot review rule -->
+<!--
+レビューする際には、以下のprefix(接頭辞)をつけてください
+[must]  
+[imo] (in my opinion)  
+[nits](nitpick) 
+[ask]  
+[fyi]
+-->
+<!-- for GitHub Copilot review  rule-->
+
 <!-- I want to review in Japanese. -->
