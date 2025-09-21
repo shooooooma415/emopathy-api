@@ -1,4 +1,4 @@
-package core
+package domain
 
 import "emopathy-api/shared/common_vo"
 
