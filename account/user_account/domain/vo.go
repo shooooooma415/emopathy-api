@@ -113,7 +113,7 @@ func (createdAt createdAt) Value() time.Time {
 }
 
 type updatedAt struct {
-	time time.Time	
+	time time.Time
 }
 
 func NewUpdatedAt(time time.Time) updatedAt {
@@ -123,7 +123,6 @@ func NewUpdatedAt(time time.Time) updatedAt {
 func NewParseUpdatedAt(time time.Time) updatedAt {
 	return updatedAt{time: time}
 }
-
 
 func (updatedAt updatedAt) String() string {
 	return updatedAt.time.String()
