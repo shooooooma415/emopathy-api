@@ -43,8 +43,11 @@ type fcmToken struct {
 	token string
 }
 
-func NewFcmToken(token string) fcmToken {
-	return fcmToken{token: token}
+func NewFcmToken(token string) (fcmToken, error) {
+	if token == "" {
+		return fcmToken{}, ex.Wrap(ErrFcmTokenIsEmpty)
+	}
+	return fcmToken{token: token}, nil
 }
 
 func NewParseFcmToken(token string) (fcmToken, error) {
@@ -97,16 +100,8 @@ func NewCreatedAt(time time.Time) createdAt {
 	return createdAt{time: time}
 }
 
-func NewParseCreatedAt(time time.Time) (createdAt, error) {
-	return createdAt{time: time}, nil
-}
-
-func MustParseCreatedAt(time time.Time) createdAt {
-	parsedCreatedAt, err := NewParseCreatedAt(time)
-	if err != nil {
-		panic(err)
-	}
-	return parsedCreatedAt
+func NewParseCreatedAt(time time.Time) createdAt {
+	return createdAt{time: time}
 }
 
 func (createdAt createdAt) String() string {
@@ -118,24 +113,17 @@ func (createdAt createdAt) Value() time.Time {
 }
 
 type updatedAt struct {
-	time time.Time
+	time time.Time	
 }
 
 func NewUpdatedAt(time time.Time) updatedAt {
 	return updatedAt{time: time}
 }
 
-func NewParseUpdatedAt(time time.Time) (updatedAt, error) {
-	return updatedAt{time: time}, nil
+func NewParseUpdatedAt(time time.Time) updatedAt {
+	return updatedAt{time: time}
 }
 
-func MustParseUpdatedAt(time time.Time) updatedAt {
-	parsedUpdatedAt, err := NewParseUpdatedAt(time)
-	if err != nil {
-		panic(err)
-	}
-	return parsedUpdatedAt
-}
 
 func (updatedAt updatedAt) String() string {
 	return updatedAt.time.String()
