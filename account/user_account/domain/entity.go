@@ -11,11 +11,12 @@ type RootEntity struct {
 }
 
 func NewRootEntity(fcmToken fcmToken, accessToken accessToken, clock common_vo.Clock) *RootEntity {
+	now := clock.Now()
 	return &RootEntity{
 		id:          RandomID(),
 		fcmToken:    fcmToken,
 		accessToken: accessToken,
-		createdAt:   NewCreatedAt(clock.Now()),
-		updatedAt:   NewUpdatedAt(clock.Now()),
+		createdAt:   NewCreatedAt(now),
+		updatedAt:   NewUpdatedAt(now),
 	}
 }
